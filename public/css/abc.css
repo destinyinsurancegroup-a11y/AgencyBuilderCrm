@@ -1,102 +1,13 @@
-/* ==========================================================
-   GLOBAL STYLES — Destiny / Agency Builder CRM Tier 1 Theme
-   ========================================================== */
-:root {
-    --gold: #D4AF37;
-    --bg: #0b0b0c;
-    --panel: #131316;
-    --soft: #1b1b20;
-    --paper: #fffdf7;
-    --line: #e7e3cc;
-    --ink: #111;
-}
-
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background: var(--bg);
-    color: #fff;
-    overflow-x: hidden;
-}
-
-/* ==========================================================
-   SIDEBAR
-   ========================================================== */
-.sidebar {
-    width: 270px;
-    background: #000 url("../assets/dazz.png") no-repeat center/cover;
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    padding: 24px 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.sidebar::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.75);
-}
-.sidebar * {
-    position: relative;
-    z-index: 1;
-}
-.sidebar-logo {
-    width: 360px;
-    max-width: 100%;
-    margin-bottom: 20px;
-    filter: drop-shadow(0 0 10px rgba(212,175,55,0.9));
-}
-.sidebar-nav {
-    width: 100%;
-    margin-top: 10px;
-}
-.sidebar-nav a {
-    display: block;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 12px;
-    margin-bottom: 6px;
-    border-radius: 8px;
-    border: 1px solid rgba(212,175,55,0.25);
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.25));
-    transition: .18s;
-    font-size: 14px;
-}
-.sidebar-nav a:hover {
-    border-color: var(--gold);
-    box-shadow: 0 0 12px rgba(212,175,55,0.35);
-    color: var(--gold);
-}
-.sidebar-nav a.active {
-    background: rgba(212,175,55,0.15);
-    border-color: var(--gold);
-    font-weight: 600;
-}
-
-/* ==========================================================
-   DASHBOARD AREA
-   ========================================================== */
-.main-content {
-    margin-left: 270px;
-    padding: 40px;
-    background: #fcfcf7;
-    color: #111;
-    min-height: 100vh;
-}
-
+/* ---- GREETING + SEARCH BAR ---- */
 #greeting {
+    color: #000;
     font-size: 1.8em;
     font-weight: 700;
     margin-bottom: 0.2em;
-    color: #000;
 }
+
 #datetime.subtitle {
-    color: var(--gold);
+    color: #b59b30;
     font-weight: 500;
     margin-bottom: 20px;
 }
@@ -107,6 +18,7 @@ body {
     margin-bottom: 25px;
     max-width: 400px;
 }
+
 .search-container input {
     flex: 1;
     padding: 10px 12px;
@@ -115,6 +27,7 @@ body {
     outline: none;
     font-size: 0.95em;
 }
+
 .search-container .search-btn {
     background-color: var(--gold);
     border: none;
@@ -129,172 +42,3 @@ body {
     background-color: #e3c84d;
 }
 
-/* Dashboard cards */
-.card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
-}
-.card {
-    background: #fff;
-    color: #111;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.06);
-    transition: 0.25s;
-    cursor: move;
-}
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.08);
-}
-.card h3 {
-    color: #111;
-    margin-top: 0;
-}
-footer {
-    margin-top: 40px;
-    text-align: center;
-    color: #555;
-}
-
-/* Sortable ghost class for drag animation */
-.sortable-ghost { opacity: 0.5; }
-.sortable-chosen { transform: scale(1.02); }
-
-/* ==========================================================
-   CONTACTS PAGE (Destiny Style)
-   ========================================================== */
-.contacts-layout { display: flex; min-height: 100vh; }
-.middle {
-    width: 600px;
-    background: var(--panel);
-    border-right: 1px solid rgba(212,175,55,0.35);
-    display: flex;
-    flex-direction: column;
-    color: #fff;
-}
-.middle-actions {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px;
-    border-bottom: 1px solid rgba(212,175,55,0.25);
-    background: linear-gradient(180deg, rgba(212,175,55,0.06), rgba(0,0,0,0));
-}
-.pager {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    background: var(--soft);
-}
-.pager .meta {
-    font-size: 12px;
-    color: var(--gold);
-}
-.pg-btn {
-    background: var(--gold);
-    color: #000;
-    border: none;
-    padding: 6px 10px;
-    border-radius: 8px;
-    font-weight: 800;
-    cursor: pointer;
-    text-decoration: none;
-}
-.pg-btn[disabled], .pg-btn:disabled {
-    opacity: .35;
-    cursor: not-allowed;
-}
-
-.search-wrap {
-    padding: 8px 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    background: var(--soft);
-}
-.search-input {
-    width: 100%;
-    padding: 10px 12px;
-    border-radius: 10px;
-    border: 1px solid var(--gold);
-    background: #0a0a0a;
-    color: #fff;
-    font-size: 14px;
-    outline: none;
-}
-
-.contact-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-}
-.contact-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 6px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    transition: .15s;
-}
-.contact-item:hover {
-    background: rgba(255,255,255,0.05);
-}
-a.name {
-    color: var(--gold);
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
-    flex: 1;
-}
-a.name:hover {
-    text-decoration: underline;
-}
-.small {
-    color: #c9c9c9;
-    font-size: 12px;
-}
-.flash {
-    box-shadow: 0 0 0 3px rgba(212,175,55,0.45);
-    border-color: var(--gold) !important;
-}
-
-.right {
-    flex: 1;
-    background: linear-gradient(180deg, #f8f8f8 0%, #f1f1f1 100%);
-    color: #000;
-    overflow-y: auto;
-    padding: 18px 40px;
-    box-shadow: inset 0 0 12px rgba(0,0,0,0.1);
-}
-.section {
-    margin-top: 18px;
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 16px 18px;
-    box-shadow: 0 6px 14px rgba(0,0,0,.06);
-}
-.section h3 {
-    margin: 0 0 10px 0;
-    font-size: 18px;
-    color: #000;
-    border-left: 4px solid var(--gold);
-    padding-left: 8px;
-}
-
-/* ==========================================================
-   SCROLLBAR STYLING
-   ========================================================== */
-::-webkit-scrollbar { width: 8px; height: 8px; }
-::-webkit-scrollbar-thumb {
-    background-color: rgba(212,175,55,0.4);
-    border-radius: 10px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(212,175,55,0.7);
-}
