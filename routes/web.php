@@ -2,30 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
-Route::get('/book', function () {
-    return view('book');
-});
-
-Route::get('/contacts', function () {
-    return view('contacts');
-});
-
-Route::get('/agents', function () {
-    return view('agents');
-});
-
-Route::get('/calendar', function () {
-    return view('calendar');
-});
-
-Route::get('/settings', function () {
-    return view('settings');
-});
-
-Route::get('/logout', function () {
-    return redirect('/');
-});
+Route::get('/', fn() => view('dashboard'));
+Route::get('/contacts', fn() => view('contacts'));
+Route::get('/book', fn() => view('book'));
+Route::get('/leads', fn() => view('leads'));
+Route::get('/service', fn() => view('service'));
+Route::get('/calendar', fn() => view('calendar'));
+Route::get('/activity', fn() => view('activity'));
+Route::get('/billing', fn() => view('billing'));
+Route::get('/settings', fn() => view('settings'));
+Route::get('/logout', fn() => view('welcome'));
