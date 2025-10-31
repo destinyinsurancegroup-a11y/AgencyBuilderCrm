@@ -54,14 +54,16 @@
     function updateGreeting() {
         const now = new Date();
         const hour = now.getHours();
-        const name = "Agent";
+
+        // Laravel user name passed from backend
+        const userName = "{{ Auth::user()->name ?? 'Agent' }}";
         let greeting;
 
         if (hour < 12) greeting = "Good morning";
         else if (hour < 18) greeting = "Good afternoon";
         else greeting = "Good evening";
 
-        document.getElementById("greeting").textContent = `${greeting}, ${name}.`;
+        document.getElementById("greeting").textContent = `${greeting}, ${userName}.`;
         document.getElementById("datetime").textContent =
             now.toLocaleString('en-US', {
                 weekday: 'long',
@@ -72,6 +74,7 @@
                 minute: '2-digit'
             });
     }
+
     updateGreeting();
     setInterval(updateGreeting, 60000);
 
@@ -83,7 +86,7 @@
         chosenClass: 'sortable-chosen'
     });
 
-    // ----- SEARCH BAR (for future expansion) -----
+    // ----- SEARCH BAR -----
     document.querySelector('.search-btn').addEventListener('click', () => {
         const query = document.getElementById('globalSearch').value.trim();
         if (query) alert(`Searching for "${query}" (feature coming soon).`);
