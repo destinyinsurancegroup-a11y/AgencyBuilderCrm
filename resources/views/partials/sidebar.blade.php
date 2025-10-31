@@ -1,7 +1,6 @@
 <div class="sidebar">
     <div class="sidebar-logo">
         <img src="{{ secure_asset('images/abc-logo.png') }}" alt="Agency Builder CRM Logo" class="sidebar-logo-img">
-        <h2 class="logo-text">AGENCY BUILDER<br><span>CRM</span></h2>
     </div>
 
     <nav class="sidebar-nav">
