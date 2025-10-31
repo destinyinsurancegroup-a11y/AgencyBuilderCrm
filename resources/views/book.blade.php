@@ -1,8 +1,8 @@
 @extends('layouts.app')
-@section('title','Book of Business')
+
+@section('title', 'Book of Business')
+
 @section('content')
-  <div class="section">
-    <h3>Book of Business</h3>
-    <p>This will show your client list soon.</p>
-  </div>
+    <h2>Book of Business</h2>
+    <p>This page will display all client and policy data for your agency.</p>
 @endsection
