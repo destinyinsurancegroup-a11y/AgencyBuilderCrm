@@ -1,5 +1,8 @@
 <aside class="sidebar">
-  <img src="{{ asset('abc-logo.png') }}" class="sidebar-logo" alt="ABC">
+  {{-- ABC Logo --}}
+  <img src="{{ asset('abc-logo.png') }}" class="sidebar-logo" alt="ABC Logo">
+
+  {{-- Sidebar Menu --}}
   <nav class="sidebar-nav">
     <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
     <a href="{{ route('book') }}" class="{{ request()->routeIs('book') ? 'active' : '' }}">Book of Business</a>
