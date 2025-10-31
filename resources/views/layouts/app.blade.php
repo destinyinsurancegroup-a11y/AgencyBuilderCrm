@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+   <link rel="stylesheet" href="{{ url('css/abc.css?v=' . time()) }}">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
