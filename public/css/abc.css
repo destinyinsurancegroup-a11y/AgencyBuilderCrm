@@ -27,36 +27,31 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 25px;
+    padding-top: 40px;
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
 }
 
+/* Enlarged logo only (no text) */
 .sidebar-logo {
     text-align: center;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .sidebar-logo-img {
-    width: 80px;
-    margin-bottom: 8px;
-}
-
-.logo-text {
-    font-size: 1rem;
-    color: var(--offwhite);
-    letter-spacing: 0.5px;
-    font-weight: 600;
-}
-.logo-text span {
-    color: var(--gold);
+    width: 560px; /* 80px × 7 = 560px (700% larger) */
+    max-width: 90%; /* Ensures it fits smaller screens */
+    height: auto;
+    margin: 0 auto;
+    display: block;
 }
 
 /* NAV LINKS */
 .sidebar-nav {
     width: 100%;
+    margin-top: 50px;
 }
 .sidebar-nav a {
     display: block;
@@ -82,11 +77,13 @@ body {
     background-color: var(--offwhite);
     min-height: 100vh;
 }
+
 h1 {
     margin-top: 0;
     color: #000;
     font-size: 1.8em;
 }
+
 .subtitle {
     color: #b59b30;
     font-weight: 500;
@@ -120,6 +117,8 @@ h1 {
     list-style: disc;
     padding-left: 20px;
 }
+
+/* FOOTER */
 footer {
     text-align: center;
     font-size: 0.9em;
