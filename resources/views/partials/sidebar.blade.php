@@ -1,15 +1,16 @@
-<aside class="sidebar">
-  {{-- ABC Logo --}}
-  <img src="{{ asset('abc-logo.png') }}" class="sidebar-logo" alt="ABC Logo">
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <img src="{{ secure_asset('images/abc-logo.png') }}" alt="Agency Builder CRM Logo" class="sidebar-logo-img">
+        <h2>AGENCY BUILDER<br><span>CRM</span></h2>
+    </div>
 
-  {{-- Sidebar Menu --}}
-  <nav class="sidebar-nav">
-    <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Dashboard</a>
-    <a href="{{ route('book') }}" class="{{ request()->routeIs('book') ? 'active' : '' }}">Book of Business</a>
-    <a href="{{ route('contacts') }}" class="{{ request()->routeIs('contacts') ? 'active' : '' }}">All Contacts</a>
-    <a href="{{ route('agents') }}" class="{{ request()->routeIs('agents') ? 'active' : '' }}">Agents</a>
-    <a href="{{ route('calendar') }}" class="{{ request()->routeIs('calendar') ? 'active' : '' }}">Calendar</a>
-    <a href="{{ route('settings') }}" class="{{ request()->routeIs('settings') ? 'active' : '' }}">Settings</a>
-    <a href="{{ route('logout') }}">Logout</a>
-  </nav>
-</aside>
+    <nav class="sidebar-nav">
+        <a href="{{ url('/') }}">Dashboard</a>
+        <a href="{{ url('/book') }}">Book of Business</a>
+        <a href="{{ url('/contacts') }}">All Contacts</a>
+        <a href="{{ url('/agents') }}">Agents</a>
+        <a href="{{ url('/calendar') }}">Calendar</a>
+        <a href="{{ url('/settings') }}">Settings</a>
+        <a href="{{ url('/logout') }}">Logout</a>
+    </nav>
+</div>
