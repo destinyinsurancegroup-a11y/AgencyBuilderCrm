@@ -2,8 +2,13 @@
 @section('title', 'Dashboard')
 
 @section('content')
-<h1>Dashboard</h1>
-<p class="subtitle">Good afternoon, Agent — here’s your daily overview.</p>
+<h1 id="greeting"></h1>
+<p id="datetime" class="subtitle"></p>
+
+<div class="search-container">
+    <input type="text" id="globalSearch" placeholder="Search contacts, leads, or clients..." />
+    <button class="search-btn">🔍</button>
+</div>
 
 <div id="dashboardCards" class="card-grid">
     <div class="card" data-id="1">
@@ -19,8 +24,8 @@
     <div class="card" data-id="2">
         <h3>📅 Upcoming Appointments</h3>
         <ul>
-            <li>John Smith — Tues 2PM</li>
-            <li>Maria Lopez — Wed 11AM</li>
+            <li>John Smith — Tues 2 PM</li>
+            <li>Maria Lopez — Wed 11 AM</li>
         </ul>
     </div>
 
@@ -45,12 +50,43 @@
 
 @push('scripts')
 <script>
-    // Enable drag & drop with Sortable.js
+    // ----- GREETING + LIVE DATE/TIME -----
+    function updateGreeting() {
+        const now = new Date();
+        const hour = now.getHours();
+        const name = "Agent";
+        let greeting;
+
+        if (hour < 12) greeting = "Good morning";
+        else if (hour < 18) greeting = "Good afternoon";
+        else greeting = "Good evening";
+
+        document.getElementById("greeting").textContent = `${greeting}, ${name}.`;
+        document.getElementById("datetime").textContent =
+            now.toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+    }
+    updateGreeting();
+    setInterval(updateGreeting, 60000);
+
+    // ----- DRAGGABLE CARDS -----
     new Sortable(document.getElementById('dashboardCards'), {
         animation: 150,
         ghostClass: 'sortable-ghost',
         dragClass: 'sortable-drag',
         chosenClass: 'sortable-chosen'
+    });
+
+    // ----- SEARCH BAR (for future expansion) -----
+    document.querySelector('.search-btn').addEventListener('click', () => {
+        const query = document.getElementById('globalSearch').value.trim();
+        if (query) alert(`Searching for "${query}" (feature coming soon).`);
     });
 </script>
 @endpush
