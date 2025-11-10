@@ -1,23 +1,37 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| These routes load the ContactController and set the home redirect.
-| This ensures / and /contacts both work properly on DigitalOcean.
+| Here is where you can register web routes for your application.
+| These routes are loaded by the RouteServiceProvider within a group
+| which contains the "web" middleware group. Now create something great!
 |
 */
 
-use Illuminate\Support\Facades\Route;
-
+// 🔹 Redirect root URL to login page if not logged in
 Route::get('/', function () {
-    return redirect('/login');
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
 });
 
-Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
-Route::get('/contacts/find', [ContactController::class, 'find'])->name('contacts.find');
+// 🔹 Authentication routes (login, register, password reset)
+Auth::routes(['verify' => true]);
+
+// 🔹 Authenticated user routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Default home route (if used)
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    // CRM dashboard route
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
