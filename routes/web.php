@@ -13,8 +13,10 @@ use App\Http\Controllers\ContactController;
 |
 */
 
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
-    return redirect()->route('contacts.index');
+    return redirect('/login');
 });
 
 Route::get('/contacts', [ContactController::class, 'index'])->name('contacts.index');
