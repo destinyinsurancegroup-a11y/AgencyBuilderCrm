@@ -10,15 +10,15 @@ FROM php:8.2-fpm
 # 1️⃣ Install system dependencies and PHP extensions
 # ----------------------------------------------------------
 RUN apt-get update && apt-get install -y \
-    libpq-dev \                # PostgreSQL client library
-    libssl-dev \               # SSL/TLS support
-    ca-certificates \          # trusted CA store
-    unzip \                    # for composer/unzip archives
-    curl \                     # for remote fetches
-    git \                      # for composer repos
-    && docker-php-ext-install pdo_pgsql \
-    && update-ca-certificates \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+    libpq-dev \ 
+    libssl-dev \ 
+    ca-certificates \ 
+    unzip \ 
+    curl \ 
+    git && \
+    docker-php-ext-install pdo_pgsql && \
+    update-ca-certificates && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # ----------------------------------------------------------
 # 2️⃣ Set working directory
@@ -33,16 +33,14 @@ COPY . .
 # ----------------------------------------------------------
 # 4️⃣ Install Composer and PHP dependencies
 # ----------------------------------------------------------
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# Install production dependencies (skip dev)
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer && \
+    composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
 # ----------------------------------------------------------
 # 5️⃣ Set proper permissions for Laravel
 # ----------------------------------------------------------
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && \
+    chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 # ----------------------------------------------------------
 # 6️⃣ Expose PHP-FPM port
