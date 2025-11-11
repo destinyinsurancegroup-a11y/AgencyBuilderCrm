@@ -1,37 +1,55 @@
-# ──────────────────────────────────────────────
-# Agency Builder CRM – Production Dockerfile
-# Fixes SSL PostgreSQL connectivity on DigitalOcean
-# ──────────────────────────────────────────────
+# ----------------------------------------------------------
+#  AgencyBuilderCRM – Secure Production Dockerfile
+#  Compatible with: PHP 8.2 / Laravel 10 / PostgreSQL / SSL
+# ----------------------------------------------------------
+
+# 🧩 Base image (PHP 8.2 with FPM)
 FROM php:8.2-fpm
 
-# Install system libraries needed for SSL + PostgreSQL
+# ----------------------------------------------------------
+# 1️⃣ Install system dependencies and PHP extensions
+# ----------------------------------------------------------
 RUN apt-get update && apt-get install -y \
-    libpq-dev \
-    libssl-dev \
-    ca-certificates \
-    unzip \
-    curl \
- && docker-php-ext-configure pdo_pgsql --with-pgsql \
- && docker-php-ext-install pdo_pgsql \
- && update-ca-certificates
+    libpq-dev \                # PostgreSQL client library
+    libssl-dev \               # SSL/TLS support
+    ca-certificates \          # trusted CA store
+    unzip \                    # for composer/unzip archives
+    curl \                     # for remote fetches
+    git \                      # for composer repos
+    && docker-php-ext-install pdo_pgsql \
+    && update-ca-certificates \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Set working directory
+# ----------------------------------------------------------
+# 2️⃣ Set working directory
+# ----------------------------------------------------------
 WORKDIR /var/www/html
 
-# Copy application files into the container
+# ----------------------------------------------------------
+# 3️⃣ Copy Laravel source code into the container
+# ----------------------------------------------------------
 COPY . .
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php && \
-    php composer.phar install --no-dev --optimize-autoloader && \
-    rm -f composer.phar
+# ----------------------------------------------------------
+# 4️⃣ Install Composer and PHP dependencies
+# ----------------------------------------------------------
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Give Laravel proper permissions for storage + cache
-RUN chown -R www-data:www-data storage bootstrap/cache && \
-    chmod -R 775 storage bootstrap/cache
+# Install production dependencies (skip dev)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
 
-# Expose PHP-FPM port
+# ----------------------------------------------------------
+# 5️⃣ Set proper permissions for Laravel
+# ----------------------------------------------------------
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
+# ----------------------------------------------------------
+# 6️⃣ Expose PHP-FPM port
+# ----------------------------------------------------------
 EXPOSE 9000
 
-# Start PHP-FPM
+# ----------------------------------------------------------
+# 7️⃣ Set default command to run PHP-FPM
+# ----------------------------------------------------------
 CMD ["php-fpm"]
