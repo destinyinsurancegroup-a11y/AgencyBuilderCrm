@@ -4,7 +4,7 @@
 # ----------------------------------------------------------
 
 # 🧩 Base image (PHP 8.2 with FPM)
-FROM php:8.2-fpm
+FROM php:8.5-fpm
 
 # ----------------------------------------------------------
 # 1️⃣ Install system dependencies and PHP extensions
